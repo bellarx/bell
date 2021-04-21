@@ -45,6 +45,10 @@ def retirement():
   else:
       return jsonify({'result': name + " It'll take you about {} years to reach your goal".format(years)})
 
+@app.route('/test')
+def test():
+    return "Works!"
+
 
 if __name__ == "__main__":
     app.run()
