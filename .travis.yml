@@ -11,9 +11,6 @@ install:
 before_script:
   - export FLASK_APP="$TRAVIS_BUILD_DIR/app.py"
   - export FLASK_DEBUG=1
-script: 
-   - python -m pytest -v # run tests
-   - flask test
 after_success:
   - codecov # submit coverage
   
