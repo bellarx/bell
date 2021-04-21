@@ -1,20 +1,17 @@
 language: python
-python:
-  - 3.6
-  - 3.7
-  - 3.8
+
+dist: xenial
 before_install:
   - python --version
   - pip install -U pip
   - pip install -U pytest
   - pip install codecov
-install:
-  - pip install -r requirements.txt
 before_script:
   - export FLASK_APP="$TRAVIS_BUILD_DIR/app.py"
   - export FLASK_DEBUG=1
 script: 
-   - pytest # run tests
+   - python -m pytest -v # run tests
    - flask test
 after_success:
   - codecov # submit coverage
+  
