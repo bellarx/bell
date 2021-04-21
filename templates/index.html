@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<title>BMI and Retirement Calculator</title>
+		<style type="text/css">
+			* {
+				font-family: sans-serif;
+			}
+		</style>
+	</head>
+
+	<body style="text-align: center;">
+		<p><font color="blue"><h1><b>BMI and Retirement Calculator.</b></h1></font></p>
+
+	<div class="form-group">
+	<label class="sr-only" for="namel">Enter Your  name please:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+	<input type="text" class="form-control" id="name" placeholder="Enter name to calculate BMI and retirement">
+	</div> <br> 
+
+<h3>BMI Calculator</h3>
+<form class="form-inline" action="{{ url_for('process') }}">
+<!--Weight-->
+<div class="form-group">
+<label class="sr-only" for="weight">Enter Your  weight in pounds:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+<input type="text" class="form-control" id="weight" placeholder="Enter Weight in (pounds)">
+</div> <br> 
+<!--Height-->
+<div class="form-group">
+<label class="sr-only" for="height">Enter your height in feet and inches:</label>
+<input type="text" class="form-control" id="height" placeholder="Height">
+</div><br>
+
+<!--Submit Button-->
+<button type="submit" class="btn btn-default">Calculate</button>
+</form>
+</br>
+<div id="output"></div>
+</br>
+
+<h3>Retirement Calculator</h3>
+<form class="form-inline" action="{{ url_for('retirement') }}">
+
+	<div class="form-group">
+		<label class="sr-only" for="age">Enter your age:</label>
+		<input type="text" class="form-control" id="age" placeholder="Your Current Age">
+	</div><br>
+
+	<div class="form-group">
+		<label class="sr-only" for="salary">Enter you annual salary:</label>
+		<input type="text" class="form-control" id="salary" placeholder="Annual Salary">
+		</div><br>
+
+	<div class="form-group">
+		<label class="sr-only" for="percentage">Enter percentage saved:</label>
+		<input type="text" class="form-control" id="percentage" placeholder="Percentage saved">
+		</div><br>
+
+	<div class="form-group">
+		<label class="sr-only" for="goal">Enter your savings goal:</label>
+		<input type="text" class="form-control" id="goal" placeholder="Savings Goal">
+		</div><br>
+
+<!--Submit Button-->
+<button type="submit" class="btn btn-default">Calculate</button>
+</form>
+</br>
+<div id="result"></div>
+</br>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script>
+	$(document).ready(function() {
+     $('form').on('submit', function(event) {
+       $.ajax({
+          data : {
+             weight : $('#weight').val(),
+             height: $('#height').val(),
+			 name: $('#name').val(),
+                 },
+             type : 'POST',
+             url : '/process'
+            })
+        .done(function(data) {
+          $('#output').text(data.output).show();
+      });
+      event.preventDefault();
+      });
+});
+	 $(document).ready(function() {	
+     $('form').on('submit', function(event) {
+       $.ajax({
+          data : {
+			 age : $('#age').val(),
+             salary: $('#salary').val(),
+			 percentage : $('#percentage').val(),
+             goal: $('#goal').val(),
+			 name: $('#name').val(),
+                 },
+             type : 'POST',
+             url : '/retirement'
+            })
+        .done(function(data) {
+		  $('#result').text(data.result).show();
+      });
+      event.preventDefault();
+      });
+	});
+		</script>
+	</body>
+</html>
