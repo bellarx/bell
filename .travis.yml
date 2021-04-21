@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 language: python
 python:
   - 3.6
@@ -15,8 +14,8 @@ install:
 before_script:
   - export FLASK_APP="$TRAVIS_BUILD_DIR/app.py"
   - export FLASK_DEBUG=1
-script: pytest # run tests
-script: flask test
+script: 
+   - pytest # run tests
+   - flask test
 after_success:
   - codecov # submit coverage
->>>>>>> 4b6dfe2fe51374f7b426245998c906945dc2654e
