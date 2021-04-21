@@ -1,5 +1,8 @@
 from flask import Flask,request,render_template,jsonify
+from configurations import DevelopmentConfig
+
 app = Flask(__name__)
+app.config.from_object(DevelopmentConfig)
 
 @app.route('/')
 def index():
